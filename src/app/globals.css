@@ -3,6 +3,11 @@
 @tailwind utilities;
 
 :root {
+  --theme-1: #ffe1ff;
+  --theme-2: #e4b1f0;
+  --theme-3: #7e60bf;
+  --theme-4: #433878;
+  --theme-5: #241e40;
   --background: #ffffff;
   --foreground: #171717;
 }
