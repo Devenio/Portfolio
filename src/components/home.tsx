@@ -1,7 +1,7 @@
-import IntroFigure from "@/app/assets/images/intro-figure.png";
+import IntroFigure from "@/assets/images/intro-figure.png";
 import Image from "next/image";
 
-export default function Introduction() {
+export default function Home() {
   return (
     <div className="flex flex-col items-center justify-center h-full absolute left-[50%] -translate-x-[50%] top-[60%] translate-y-[-50%]">
       <div className="relative">
