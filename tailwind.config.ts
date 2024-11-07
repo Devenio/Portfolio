@@ -11,13 +11,26 @@ const config: Config = {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
-        theme: {
-          1: "var(--theme-1)",
-          2: "var(--theme-2)",
-          3: "var(--theme-3)",
-          4: "var(--theme-4)",
-          5: "var(--theme-5)",
+        "theme-background": "var(--theme-background)",
+        "theme-primary": "var(--theme-primary)",
+        "theme-secondary": "var(--theme-secondary)",
+        "theme-accent": "var(--theme-accent)",
+      },
+      keyframes: {
+        grow: {
+          "0%, 100%": { width: "100%" },
+          "50%": { width: "50%" },
         },
+        "draw-and-wave": {
+          "0%": { strokeDashoffset: "3000", transform: "translateY(0px)" },
+          "50%": { strokeDashoffset: "0", transform: "translateY(0px)" }, // Path fully drawn at 50%
+          "75%": { transform: "translateY(-10px)" }, // Start waving after draw
+          "100%": { transform: "translateY(0px)" }, // Complete wave
+        },
+      },
+      animation: {
+        grow: "grow 1s ease-in-out infinite",
+        "draw-and-wave": "draw-and-wave 6s ease-in-out infinite",
       },
     },
   },

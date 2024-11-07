@@ -2,10 +2,11 @@
 
 import { motion, AnimatePresence } from "framer-motion";
 import { useEffect } from "react";
-import { useSection, sections } from "@/lib/providers/SectionProvider";
+import { useSection } from "@/lib/providers/SectionProvider";
 
 export default function Section() {
-  const { sectionIndex, scrollDirection, handleScroll } = useSection();
+  const { sectionIndex, scrollDirection, handleScroll, sections } =
+    useSection();
 
   useEffect(() => {
     window.addEventListener("wheel", handleScroll);
@@ -25,21 +26,23 @@ export default function Section() {
   };
 
   return (
-    <AnimatePresence mode="wait" custom={scrollDirection}>
-      <motion.main
-        key={sectionIndex}
-        variants={variants}
-        initial="enter"
-        animate="center"
-        exit="exit"
-        custom={scrollDirection}
-        transition={{ duration: 0.5 }}
-        className="h-screen flex items-center justify-center"
-      >
-        <h1 className="text-4xl text-white">
+    <div
+      className={`h-full flex items-center justify-center color-transition bg-theme-background`}
+    >
+      <AnimatePresence mode="wait" custom={scrollDirection}>
+        <motion.main
+          key={sectionIndex}
+          variants={variants}
+          initial="enter"
+          animate="center"
+          exit="exit"
+          custom={scrollDirection}
+          transition={{ duration: 0.5, damping: 10, stiffness: 100 }}
+          className="flex items-center justify-center h-full"
+        >
           {sections[sectionIndex].content}
-        </h1>
-      </motion.main>
-    </AnimatePresence>
+        </motion.main>
+      </AnimatePresence>
+    </div>
   );
 }
