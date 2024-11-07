@@ -5,12 +5,11 @@ import Image from "next/image";
 import Link from "next/link";
 import MjolnirCover from "@/assets/images/mjolnir-cover.png";
 import AinurCover from "@/assets/images/ainur-cover.png";
-import JetonCover from "@/assets/images/Jeton-cover.png";
+import JetonCover from "@/assets/images/jeton-cover.png";
 
 const Works: React.FC = () => {
   const { subsectionIndex } = useSection();
 
-  // Track the current displayed content separately from subsectionIndex
   const [currentContentIndex, setCurrentContentIndex] =
     useState(subsectionIndex);
 
