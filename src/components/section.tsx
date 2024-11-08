@@ -1,24 +1,12 @@
 "use client";
 
 import { motion, AnimatePresence } from "framer-motion";
-import { useEffect } from "react";
 import { useSection } from "@/lib/hooks";
 import { ANIMATION_DURATION, SECTIONS } from "@/lib/constants";
 import { Direction } from "@/lib/types";
 
 export default function Section() {
-  const { sectionIndex, scrollDirection, handleScroll } = useSection();
-
-  const hasMouse = () => {
-    return matchMedia("(pointer: fine)").matches;
-  };
-
-  useEffect(() => {
-    if (hasMouse()) {
-      window.addEventListener("wheel", handleScroll);
-      return () => window.removeEventListener("wheel", handleScroll);
-    }
-  }, [handleScroll]);
+  const { sectionIndex, navigationDirection } = useSection();
 
   const variants = {
     enter: (direction: Direction) => ({
@@ -33,15 +21,15 @@ export default function Section() {
   };
 
   return (
-    <div className="h-full flex items-center justify-center color-transition bg-theme-background">
-      <AnimatePresence mode="wait" custom={scrollDirection}>
+    <div className="h-full flex items-center justify-center   bg-theme-background">
+      <AnimatePresence mode="wait" custom={navigationDirection}>
         <motion.main
           key={sectionIndex}
           variants={variants}
           initial="enter"
           animate="center"
           exit="exit"
-          custom={scrollDirection}
+          custom={navigationDirection}
           transition={{
             duration: ANIMATION_DURATION.MEDIUM,
             damping: 10,

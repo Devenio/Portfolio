@@ -5,7 +5,7 @@ export default function Home() {
   return (
     <div className="flex flex-col items-center justify-center h-full w-full -z-20">
       <div className="relative flex items-center justify-center mt-20">
-        <p className="text-[calc(100vw/6)] font-light text-theme-primary -z-10 absolute color-transition">
+        <p className="text-[calc(100vw/6)] font-light text-theme-primary -z-10 absolute  ">
           MAHZIYAR
         </p>
         <Image
@@ -17,7 +17,7 @@ export default function Home() {
         />
       </div>
 
-      <p className="text-4xl text-white mt-2 text-center">
+      <p className="text-2xl mt-10 sm:text-4xl text-white sm:mt-2 text-center">
         Let’s create cool stuff together
       </p>
       <button className="text-theme-background text-lg rounded-2xl bg-white text-theme-4 hover:bg-theme-accent font-semibold hover:text-white transition-colors px-24 py-3 mt-5">

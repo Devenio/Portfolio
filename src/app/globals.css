@@ -50,12 +50,21 @@
   }
 }
 
+@layer base {
+  * {
+    @apply transition-colors;
+  }
+}
+
 @layer utilities {
   .text-balance {
     text-wrap: balance;
   }
 
-  .color-transition {
-    @apply transition-colors delay-[400ms];
+  .transition-colors {
+    transition-property: color, background-color, border-color,
+      text-decoration-color, fill, stroke;
+    transition-duration: 0.2s;
+    transition-delay: 0.4s; /* value should be exact as animation config duration in constants */
   }
 }

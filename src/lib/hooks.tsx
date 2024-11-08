@@ -1,7 +1,7 @@
 "use client";
 
+import { SectionContext } from "@/components/section-provider";
 import { useContext } from "react";
-import { SectionContext } from "./providers/SectionProvider";
 
 export const useSection = () => {
   const context = useContext(SectionContext);

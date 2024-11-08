@@ -3,9 +3,10 @@
 import { useSection } from "@/lib/hooks";
 import Navigation from "./navigation";
 import Curves from "./curves";
-import { AnimatePresence, motion } from "framer-motion";
+import { motion } from "framer-motion";
 import Socials from "./socials";
-import { ANIMATION_DURATION, SECTIONS } from "@/lib/constants";
+import { ANIMATION_DURATION } from "@/lib/constants";
+import SectionTitle from "./section-title";
 
 export default function Frame() {
   const { sectionIndex } = useSection();
@@ -19,12 +20,20 @@ export default function Frame() {
           opacity: 1,
         }}
         transition={{ duration: ANIMATION_DURATION.MEDIUM, ease: "easeInOut" }}
-        className={`fixed top-5 sm:top-10 text-lg left-5 sm:left-10 sm:text-4xl z-20 color-transition text-white`}
+        className={`fixed top-5 sm:top-10 text-lg left-5 sm:left-10 sm:text-4xl text-white`}
       >
         Mahziyar Erfani
       </motion.h1>
 
-      <motion.p className="2xl:mt-5 fixed bottom-5 sm:bottom-10 left-5 sm:left-10 text-theme-secondary text-lg font-semibold color-transition">
+      <motion.p
+        initial={{ y: 20, opacity: 0 }}
+        animate={{
+          y: 0,
+          opacity: 1,
+        }}
+        transition={{ duration: ANIMATION_DURATION.MEDIUM, ease: "easeInOut" }}
+        className="2xl:mt-5 fixed bottom-5 sm:bottom-10 left-5 sm:left-10 text-theme-secondary text-lg font-semibold  "
+      >
         Frontend Developer
       </motion.p>
 
@@ -35,26 +44,13 @@ export default function Frame() {
           opacity: 1,
         }}
         transition={{ duration: 0.5, ease: "easeInOut" }}
-        className={`fixed top-[calc(50dvh-(176px/2))] z-20 hidden md:block left-5 sm:left-10 h-44 w-1 rounded-lg color-transition bg-theme-primary`}
+        className={`fixed top-[calc(50dvh-(176px/2))] z-20 hidden md:block left-5 sm:left-10 h-44 w-1 rounded-lg bg-theme-primary`}
       />
 
-      <Socials />
+      <Socials className="hidden lg:flex" />
       <Curves />
       <Navigation />
-      <AnimatePresence>
-        {sectionIndex > 0 && (
-          <motion.h2
-            key={sectionIndex}
-            initial={{ x: 20, opacity: 0 }}
-            animate={{ x: 0, opacity: 1 }}
-            exit={{ x: 20, opacity: 0 }}
-            transition={{ duration: 0.5, ease: "easeInOut" }}
-            className="fixed right-5 sm:right-10 top-[50%] text-6xl translate-y-[-50%] text-theme-primary font-semibold color-transition z-20"
-          >
-            {SECTIONS[sectionIndex].title}
-          </motion.h2>
-        )}
-      </AnimatePresence>
+      <SectionTitle />
     </div>
   );
 }

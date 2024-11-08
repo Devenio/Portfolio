@@ -16,8 +16,7 @@ export type SectionContextType = {
   sectionIndex: number;
   subsectionIndex: number;
   setSectionIndex: (index: number) => void;
-  handleScroll: (event: WheelEvent) => void;
-  scrollDirection: Direction;
+  navigationDirection: Direction;
   setSubsectionIndex: (index: number) => void;
 };
 

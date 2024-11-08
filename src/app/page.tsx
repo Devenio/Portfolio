@@ -1,4 +1,4 @@
-import { SectionProvider } from "@/lib/providers/SectionProvider";
+import { SectionProvider } from "@/components/section-provider";
 import Section from "@/components/section";
 import Frame from "@/components/frame";
 

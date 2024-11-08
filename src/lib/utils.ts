@@ -1,4 +1,6 @@
 import { Section, SectionWithIndex } from "./types";
+import { type ClassValue, clsx } from "clsx";
+import { twMerge } from "tailwind-merge";
 
 export function generateUniqueTitleSections(
   sections: Section[]
@@ -14,4 +16,8 @@ export function generateUniqueTitleSections(
   });
 
   return uniqueSections;
+}
+
+export function cn(...inputs: ClassValue[]) {
+  return twMerge(clsx(inputs));
 }
