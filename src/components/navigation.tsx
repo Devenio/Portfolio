@@ -1,13 +1,17 @@
 "use client";
 
-import {
-  useSection,
-  sectionNavigationOptions,
-  WORK_SUBSECTIONS,
-  Sections,
-} from "@/lib/providers/SectionProvider";
+import { useSection } from "@/lib/hooks";
 import { useState } from "react";
 import { motion, AnimatePresence, easeInOut } from "framer-motion";
+import {
+  ANIMATION_DURATION,
+  SECTIONS,
+  WORK_SUBSECTIONS,
+} from "@/lib/constants";
+import { generateUniqueTitleSections } from "@/lib/utils";
+import { Sections } from "@/lib/types";
+
+const sectionNavigationOptions = generateUniqueTitleSections(SECTIONS);
 
 export default function Navigation() {
   const { sectionIndex, subsectionIndex, setSectionIndex, setSubsectionIndex } =
@@ -21,10 +25,14 @@ export default function Navigation() {
       x: 0,
       transition: {
         delay: i * 0.2,
-        duration: 0.4,
+        duration: ANIMATION_DURATION.MEDIUM,
       },
     }),
-    exit: { opacity: 0, x: 20, transition: { duration: 0.4 } },
+    exit: {
+      opacity: 0,
+      x: 20,
+      transition: { duration: ANIMATION_DURATION.MEDIUM },
+    },
   };
 
   const indicatorVariants = {
@@ -41,7 +49,11 @@ export default function Navigation() {
         duration: 0.6,
       },
     }),
-    exit: { opacity: 0, y: -10, transition: { duration: 0.4 } },
+    exit: {
+      opacity: 0,
+      y: -10,
+      transition: { duration: ANIMATION_DURATION.MEDIUM },
+    },
   };
 
   const lineVariants = {
@@ -113,7 +125,7 @@ export default function Navigation() {
                             }}
                             exit={{ width: "4px", opacity: 0.5 }}
                             transition={{
-                              duration: 0.5,
+                              duration: ANIMATION_DURATION.MEDIUM,
                               ease: "easeInOut",
                             }}
                             className="h-1 rounded-full bg-theme-primary color-transition"

@@ -12,6 +12,8 @@ export default function Home() {
           className="w-52 md:w-72 lg:w-80"
           src={IntroFigure}
           alt="figure"
+          priority
+          loading="eager"
         />
       </div>
 

@@ -1,49 +1,23 @@
+"use client";
+
 import React, { useEffect, useState } from "react";
-import { useSection } from "@/lib/providers/SectionProvider";
+import { useSection } from "@/lib/hooks";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
-import MjolnirCover from "@/assets/images/mjolnir-cover.png";
-import AinurCover from "@/assets/images/ainur-cover.png";
-import JetonCover from "@/assets/images/jeton-cover.png";
+import { ANIMATION_DURATION, WORKS_ITEMS } from "@/lib/constants";
 
-const Works: React.FC = () => {
+export default function Works() {
   const { subsectionIndex } = useSection();
+  const [currentWorkItem, setCurrentWorkItem] = useState(subsectionIndex);
 
-  const [currentContentIndex, setCurrentContentIndex] =
-    useState(subsectionIndex);
-
-  const worksContent = [
-    {
-      cover: MjolnirCover,
-      title: "Mjolnir",
-      subject: "Design and Implementation",
-      description:
-        "Potter ipsum wand elf parchment wingardium. Trace hedwig seven expecto scales.",
-      link: "https://mjolnir.ainurhq.cloud",
-    },
-    {
-      cover: AinurCover,
-      title: "Ainur",
-      subject: "Prototyping and Design",
-      description:
-        "Potter ipsum wand elf parchment wingardium. Trace hedwig seven expecto scales.",
-      link: "https://link-to-project-2.com",
-    },
-    {
-      cover: JetonCover,
-      title: "Jeton",
-      subject: "Design and Implementation",
-      description:
-        "Potter ipsum wand elf parchment wingardium. Trace hedwig seven expecto scales.",
-      link: "https://jeton.pages.dev/",
-    },
-  ];
+  const { cover, title, subject, description, link } =
+    WORKS_ITEMS[currentWorkItem];
 
   useEffect(() => {
     const timeout = setTimeout(
-      () => setCurrentContentIndex(subsectionIndex),
-      500
+      () => setCurrentWorkItem(subsectionIndex),
+      ANIMATION_DURATION.MEDIUM * 1000
     );
     return () => clearTimeout(timeout);
   }, [subsectionIndex]);
@@ -65,8 +39,10 @@ const Works: React.FC = () => {
       <div className="relative flex items-center justify-center">
         <div className="relative">
           <Image
-            src={worksContent[currentContentIndex].cover}
-            alt={`${worksContent[currentContentIndex].title} cover`}
+            priority
+            loading="eager"
+            src={cover}
+            alt={`${title} cover`}
             className="rounded-3xl border-theme-accent border-[12px] w-[920px] z-10 color-transition"
           />
           <motion.div
@@ -81,16 +57,16 @@ const Works: React.FC = () => {
 
         <div className="relative flex flex-col w-96 pb-5 pr-4 pl-9 pt-10 border-theme-accent border-2 color-transition right-28 rounded-3xl z-10">
           <h4 className="work-subject text-lg text-theme-primary mb-3 color-transition">
-            {worksContent[currentContentIndex].subject}
+            {subject}
           </h4>
           <h3 className="work-title text-2xl font-semibold text-white mb-14 color-transition">
-            {worksContent[currentContentIndex].title}
+            {title}
           </h3>
           <p className="work-description text-base text-white mb-24 color-transition">
-            {worksContent[currentContentIndex].description}
+            {description}
           </p>
           <Link
-            href={worksContent[currentContentIndex].link}
+            href={link}
             target="_blank"
             rel="noopener noreferrer"
             className="self-end bg-theme-primary text-theme-background text-sm font-medium px-6 py-2 rounded-xl color-transition"
@@ -113,6 +89,4 @@ const Works: React.FC = () => {
       </div>
     </div>
   );
-};
-
-export default Works;
+}

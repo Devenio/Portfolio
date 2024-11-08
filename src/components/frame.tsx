@@ -1,10 +1,11 @@
 "use client";
 
-import { sections, useSection } from "@/lib/providers/SectionProvider";
+import { useSection } from "@/lib/hooks";
 import Navigation from "./navigation";
 import Curves from "./curves";
 import { AnimatePresence, motion } from "framer-motion";
 import Socials from "./socials";
+import { ANIMATION_DURATION, SECTIONS } from "@/lib/constants";
 
 export default function Frame() {
   const { sectionIndex } = useSection();
@@ -17,7 +18,7 @@ export default function Frame() {
           y: 0,
           opacity: 1,
         }}
-        transition={{ duration: 0.5, ease: "easeInOut" }}
+        transition={{ duration: ANIMATION_DURATION.MEDIUM, ease: "easeInOut" }}
         className={`fixed top-5 sm:top-10 text-lg left-5 sm:left-10 sm:text-4xl z-20 color-transition text-white`}
       >
         Mahziyar Erfani
@@ -50,7 +51,7 @@ export default function Frame() {
             transition={{ duration: 0.5, ease: "easeInOut" }}
             className="fixed right-5 sm:right-10 top-[50%] text-6xl translate-y-[-50%] text-theme-primary font-semibold color-transition z-20"
           >
-            {sections[sectionIndex].title}
+            {SECTIONS[sectionIndex].title}
           </motion.h2>
         )}
       </AnimatePresence>

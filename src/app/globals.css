@@ -56,6 +56,6 @@
   }
 
   .color-transition {
-    @apply transition-colors delay-500;
+    @apply transition-colors delay-[400ms];
   }
 }
