@@ -68,7 +68,7 @@ export default function Works() {
           ))}
         </div>
 
-        <div className="relative flex flex-col lg:w-96 pt-5 pb-5 pr-4 lg:pl-9 lg:pt-10 border-theme-accent lg:border-2   lg:right-28 rounded-3xl z-10">
+        <div className="relative flex flex-col lg:w-96 pt-5 pb-5 pr-4 lg:pl-9 lg:pt-10 border-theme-accent lg:border-2 lg:right-28 rounded-3xl z-10">
           <h4 className="work-subject text-sm lg:text-lg text-theme-primary mb-3  ">
             {subject}
           </h4>
@@ -88,7 +88,7 @@ export default function Works() {
           </Link>
 
           <div className="absolute inset-0 h-full rounded-3xl bg-theme-background -z-10" />
-          <div className="absolute inset-0 h-full rounded-3xl overflow-hidden">
+          <div className="absolute inset-0 h-full rounded-3xl mt-1 lg:overflow-hidden">
             {overlayColors.map((color, index) => (
               <motion.div
                 key={`info-overlay-${subsectionIndex}-${index}`}

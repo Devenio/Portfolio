@@ -4,7 +4,7 @@ import Image from "next/image";
 export default function Home() {
   return (
     <div className="flex flex-col items-center justify-center h-full w-full -z-20">
-      <div className="relative flex items-center justify-center mt-20">
+      <div className="relative flex items-center justify-center sm:mt-20">
         <p className="text-[calc(100vw/6)] font-light text-theme-primary -z-10 absolute  ">
           MAHZIYAR
         </p>

@@ -7,13 +7,19 @@ import {
   SectionContextType,
   Sections,
 } from "@/lib/types";
-import { SECTION_THEME_MAP, SECTIONS, WORK_SUBSECTIONS } from "@/lib/constants";
+import {
+  ANIMATION_DURATION,
+  SECTION_THEME_MAP,
+  SECTIONS,
+  WORK_SUBSECTIONS,
+} from "@/lib/constants";
 
 export const SectionContext = createContext<SectionContextType | undefined>(
   undefined
 );
 
-const TRANSITION_DURATION = 800;
+const TRANSITION_DURATION = ANIMATION_DURATION.MEDIUM * 2000;
+const SWIPE_THRESHOLD = 50;
 
 export const SectionProvider = ({
   children,
@@ -28,6 +34,16 @@ export const SectionProvider = ({
     useState<Direction>("down");
   const [touchStartY, setTouchStartY] = useState<number | null>(null);
 
+  const delayTransition = useCallback(() => {
+    return new Promise<void>((resolve) => {
+      setTimeout(() => {
+        setIsTransitioning(false);
+        setCanScroll(true);
+        resolve();
+      }, TRANSITION_DURATION);
+    });
+  }, []);
+
   const handleMainSectionChange = useCallback((direction: Direction) => {
     setSectionIndex((prevIndex) => {
       const newIndex =
@@ -39,9 +55,10 @@ export const SectionProvider = ({
   }, []);
 
   const updateCurrentSection = useCallback(
-    (direction: Direction) => {
+    async (direction: Direction) => {
       if (isTransitioning) return;
       setIsTransitioning(true);
+      setCanScroll(false);
 
       if (sectionIndex === Sections.Works) {
         setSubsectionIndex((prevSubIndex) => {
@@ -68,9 +85,9 @@ export const SectionProvider = ({
         handleMainSectionChange(direction);
       }
 
-      setTimeout(() => setIsTransitioning(false), TRANSITION_DURATION);
+      await delayTransition();
     },
-    [sectionIndex, isTransitioning, handleMainSectionChange]
+    [sectionIndex, isTransitioning, handleMainSectionChange, delayTransition]
   );
 
   const handleScroll = useCallback(
@@ -81,9 +98,6 @@ export const SectionProvider = ({
       const direction = event.deltaY > 0 ? "down" : "up";
       setNavigationDirection(direction);
       updateCurrentSection(direction);
-      setCanScroll(false);
-
-      setTimeout(() => setCanScroll(true), TRANSITION_DURATION);
     },
     [canScroll, isTransitioning, updateCurrentSection]
   );
@@ -92,19 +106,17 @@ export const SectionProvider = ({
     setTouchStartY(event.touches[0].clientY);
   }, []);
 
-  const handleTouchMove = useCallback(
+  const handleTouchEnd = useCallback(
     (event: TouchEvent) => {
       if (!canScroll || isTransitioning || touchStartY === null) return;
 
-      const touchEndY = event.touches[0].clientY;
-      const direction = touchStartY - touchEndY > 0 ? "down" : "up";
-      setNavigationDirection(direction);
+      const touchEndY = event.changedTouches[0].clientY;
+      const swipeDistance = Math.abs(touchStartY - touchEndY);
 
-      if (canScroll) {
+      if (swipeDistance > SWIPE_THRESHOLD) {
+        const direction = touchStartY - touchEndY > 0 ? "down" : "up";
+        setNavigationDirection(direction);
         updateCurrentSection(direction);
-        setCanScroll(false);
-
-        setTimeout(() => setCanScroll(true), TRANSITION_DURATION);
       }
 
       setTouchStartY(null);
@@ -127,13 +139,13 @@ export const SectionProvider = ({
       return () => window.removeEventListener("wheel", handleScroll);
     } else {
       window.addEventListener("touchstart", handleTouchStart);
-      window.addEventListener("touchmove", handleTouchMove);
+      window.addEventListener("touchend", handleTouchEnd);
       return () => {
         window.removeEventListener("touchstart", handleTouchStart);
-        window.removeEventListener("touchmove", handleTouchMove);
+        window.removeEventListener("touchend", handleTouchEnd);
       };
     }
-  }, [handleScroll, handleTouchStart, handleTouchMove]);
+  }, [handleScroll, handleTouchStart, handleTouchEnd]);
 
   useEffect(() => {
     const colorsMap = SECTION_THEME_MAP[sectionIndex];

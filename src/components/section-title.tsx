@@ -16,7 +16,7 @@ export default function SectionTitle() {
           animate={{ x: 0, opacity: 1 }}
           exit={{ x: 20, opacity: 0 }}
           transition={{ duration: 0.5, ease: "easeInOut" }}
-          className="fixed right-5 sm:right-10 sm:bottom-10 lg:right-10 bottom-5 lg:bottom-auto lg:top-[50%] lg:text-6xl translate-y-[-50%] text-theme-primary font-semibold text-3xl"
+          className="fixed right-5 sm:right-10 sm:bottom-10 lg:right-10 bottom-5 lg:bottom-auto lg:top-[50%] lg:text-6xl translate-y-[-50%] text-theme-primary font-semibold sm:text-4xl text-2xl"
         >
           {SECTIONS[sectionIndex].title}
         </motion.h2>
