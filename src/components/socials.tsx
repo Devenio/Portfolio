@@ -26,27 +26,24 @@ export default function Socials({ className }: { className?: string }) {
     <motion.div
       initial="hidden"
       animate="visible"
-      className={cn(
-        "fixed bottom-5 flex items-center gap-5 right-5 sm:bottom-10 sm:right-10 z-10",
-        className
-      )}
+      className={cn("flex items-center gap-5 z-10", className)}
     >
       <Link
         href="https://www.linkedin.com/in/mahziyar-erfani-a713a718a/"
         target="_blank"
       >
         <motion.div custom={0} variants={iconVariants}>
-          <LinkedinIcon className="fill-theme-primary hover:scale-105 transition-transform duration-200  " />
+          <LinkedinIcon className="fill-theme-primary hover:scale-105 transition-transform duration-200 delay-0  " />
         </motion.div>
       </Link>
       <Link href="https://github.com/mhzrerfani" target="_blank">
         <motion.div custom={1} variants={iconVariants}>
-          <GithubIcon className="fill-theme-primary hover:scale-105 transition-transform duration-200  " />
+          <GithubIcon className="fill-theme-primary hover:scale-105 transition-transform duration-200 delay-0  " />
         </motion.div>
       </Link>
       <Link href="https://dribbble.com/mhzrerfani" target="_blank">
         <motion.div custom={2} variants={iconVariants}>
-          <DribbbleIcon className="fill-theme-primary hover:scale-105 transition-transform duration-200  " />
+          <DribbbleIcon className="fill-theme-primary hover:scale-105 transition-transform duration-200 delay-0  " />
         </motion.div>
       </Link>
     </motion.div>

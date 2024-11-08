@@ -18,6 +18,7 @@ export type SectionContextType = {
   setSectionIndex: (index: number) => void;
   navigationDirection: Direction;
   setSubsectionIndex: (index: number) => void;
+  isTransitioning: boolean;
 };
 
 export type SectionColors = {

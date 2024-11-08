@@ -12,7 +12,7 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en">
-      <body className={`${roboto.variable} h-screen overflow-y-hidden`}>
+      <body className={`${roboto.variable} h-dvh overflow-y-hidden`}>
         {children}
       </body>
     </html>

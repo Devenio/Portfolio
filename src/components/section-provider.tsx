@@ -18,7 +18,7 @@ export const SectionContext = createContext<SectionContextType | undefined>(
   undefined
 );
 
-const TRANSITION_DURATION = ANIMATION_DURATION.MEDIUM * 2000;
+const TRANSITION_DURATION = ANIMATION_DURATION.MEDIUM * 3000;
 const SWIPE_THRESHOLD = 50;
 
 export const SectionProvider = ({
@@ -191,6 +191,7 @@ export const SectionProvider = ({
         setSectionIndex: handleNavigation,
         setSubsectionIndex,
         navigationDirection,
+        isTransitioning,
       }}
     >
       {children}

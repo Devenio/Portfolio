@@ -1,7 +1,7 @@
 "use client";
 
 import { useSection } from "@/lib/hooks";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   ANIMATION_DURATION,
@@ -10,13 +10,20 @@ import {
 } from "@/lib/constants";
 import { generateUniqueTitleSections } from "@/lib/utils";
 import { Sections } from "@/lib/types";
+import Socials from "./socials";
 
 const sectionNavigationOptions = generateUniqueTitleSections(SECTIONS);
 
 export default function Navigation() {
   const { sectionIndex, subsectionIndex, setSectionIndex, setSubsectionIndex } =
     useSection();
-  const [isHidden, setIsHidden] = useState(false);
+
+  const [isHidden, setIsHidden] = useState(true);
+
+  useEffect(() => {
+    // Set `isHidden` based on the initial screen size
+    setIsHidden(window.innerWidth < 1024); // `true` for mobile, `false` for desktop
+  }, []);
 
   const buttonVariants = {
     hidden: { opacity: 0, x: 20 },
@@ -35,6 +42,26 @@ export default function Navigation() {
     },
   };
 
+  const indicatorVariants = {
+    hidden: { opacity: 0, y: -10 },
+    visible: (i: number) => ({
+      opacity: 1,
+      x: 0,
+      y: i * 42,
+      transition: {
+        type: "spring",
+        stiffness: 300,
+        damping: 30,
+        duration: 0.6,
+      },
+    }),
+    exit: {
+      opacity: 0,
+      y: -10,
+      transition: { duration: ANIMATION_DURATION.MEDIUM },
+    },
+  };
+
   const toggle = () => {
     setIsHidden((prev) => !prev);
   };
@@ -45,11 +72,24 @@ export default function Navigation() {
       <AnimatePresence>
         {!isHidden && (
           <motion.div
-            className="hidden lg:flex flex-col items-start gap-4"
+            className="hidden lg:flex flex-col items-start gap-4 relative"
             initial="hidden"
             animate="visible"
             exit="hidden"
           >
+            <motion.div
+              className="absolute left-[-16px] color-transition w-1 h-1 rounded-full bg-theme-primary"
+              variants={indicatorVariants}
+              initial="hidden"
+              animate="visible"
+              custom={sectionNavigationOptions.indexOf(
+                sectionNavigationOptions.findLast(
+                  (option) => option.index <= sectionIndex
+                ) as (typeof sectionNavigationOptions)[number]
+              )}
+              exit="exit"
+            />
+
             {sectionNavigationOptions.map((section, i) => (
               <motion.div key={section.title} className="relative">
                 <motion.button
@@ -100,7 +140,7 @@ export default function Navigation() {
       <AnimatePresence>
         {!isHidden && (
           <motion.div
-            className="lg:hidden fixed top-0 rounded-b-3xl left-0 right-0 h-1/3 bg-theme-background flex flex-col items-center justify-center z-20 p-4 shadow-lg"
+            className="lg:hidden fixed top-0 rounded-b-3xl gap-2 left-0 right-0 bg-theme-background flex flex-col items-center justify-center z-20 p-4 shadow-lg"
             initial={{ opacity: 0, y: -100 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -100 }}
@@ -157,6 +197,8 @@ export default function Navigation() {
                 </AnimatePresence>
               </motion.div>
             ))}
+
+            <Socials className="py-2 mt-4" />
           </motion.div>
         )}
       </AnimatePresence>

@@ -12,7 +12,7 @@ export default function Frame() {
   const { sectionIndex } = useSection();
 
   return (
-    <div className="w-full h-screen absolute">
+    <div className="w-full h-dvh absolute ">
       <motion.h1
         initial={{ y: -20, opacity: 0 }}
         animate={{
@@ -47,7 +47,7 @@ export default function Frame() {
         className={`fixed top-[calc(50dvh-(176px/2))] z-20 hidden md:block left-5 sm:left-10 h-44 w-1 rounded-lg bg-theme-primary`}
       />
 
-      <Socials className="hidden lg:flex" />
+      <Socials className="hidden lg:flex right-5 sm:bottom-10 sm:right-10 fixed bottom-5 " />
       <Curves />
       <Navigation />
       <SectionTitle />

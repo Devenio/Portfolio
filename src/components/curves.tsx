@@ -8,26 +8,24 @@ export default function Curves() {
   const path2Ref = useRef<SVGPathElement>(null);
 
   useEffect(() => {
-    const tl = gsap.timeline({ repeat: 1, yoyo: true });
+    const tl = gsap.timeline({ repeat: -1, yoyo: true });
 
     tl.to(path1Ref.current, {
-      strokeDashoffset: 1,
+      strokeDashoffset: 0,
       duration: 2,
-      delay: 300,
       ease: "power2.out",
     });
 
     tl.to(path2Ref.current, {
-      strokeDashoffset: 1,
+      strokeDashoffset: 0,
       duration: 2,
-      delay: 300,
       ease: "power2.out",
     });
   }, []);
 
   return (
     <svg
-      className="fixed left-0 bottom-0 stroke-theme-primary opacity-15   -z-10"
+      className="fixed left-0 bottom-0  stroke-theme-primary opacity-15 "
       viewBox="0 0 1202 1080"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"

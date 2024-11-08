@@ -16,8 +16,14 @@ export const WORK_SUBSECTIONS = 3;
 export const SECTIONS: Section[] = [
   { content: <Home />, title: "Home" },
   { content: <Works />, title: "Works" },
-  { content: <Home />, title: "Experiences" },
-  { content: <Home />, title: "Contact" },
+  {
+    content: <div className="text-theme-primary">Under construction :)</div>,
+    title: "Experiences",
+  },
+  {
+    content: <div className="text-theme-primary">Under construction :)</div>,
+    title: "Contact",
+  },
 ];
 
 export const THEMES: Record<string, SectionColors> = {
@@ -72,7 +78,7 @@ export const WORKS_ITEMS = [
     title: "Mjolnir",
     subject: "Design and Implementation",
     description:
-      "Potter ipsum wand elf parchment wingardium. Trace hedwig seven expecto scales.",
+      "Mjolnir is a platform forged in the spirit of Norse mythology, where the power of creation is placed in your hands. It's built with Svelte.",
     link: "https://mjolnir.ainurhq.cloud",
   },
   {
@@ -80,15 +86,15 @@ export const WORKS_ITEMS = [
     title: "Ainur",
     subject: "Prototyping and Design",
     description:
-      "Potter ipsum wand elf parchment wingardium. Trace hedwig seven expecto scales.",
-    link: "https://link-to-project-2.com",
+      "Ainur is a Constancy agency that help startups and companies implement ideas and grow their businesses. This is a prototype for its landing page design.",
+    link: "https://www.figma.com/design/41igncAoFURohk6jIghEeu/Ainurhq-cloud?node-id=1-2&t=UmYufqh5Q4brfsWl-1",
   },
   {
     cover: JetonCover,
     title: "Jeton",
     subject: "Design and Implementation",
     description:
-      "Potter ipsum wand elf parchment wingardium. Trace hedwig seven expecto scales.",
+      "Aptos Code Collision Hackathon Winner, Jeton is a decentralized poker platform designed to ensure fairness and transparency in online poker games. Built on the Aptos blockchain and for the web app built with Nextjs. ",
     link: "https://jeton.pages.dev/",
   },
 ];
