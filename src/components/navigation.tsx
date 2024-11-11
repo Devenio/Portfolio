@@ -52,7 +52,7 @@ export default function Navigation() {
             />
 
             {sectionNavigationOptions.map((section, i) => (
-              <motion.div key={section.title} className="relative">
+              <motion.div key={section.title} className="relative w-28">
                 <motion.button
                   custom={i}
                   variants={buttonVariants}
@@ -61,9 +61,10 @@ export default function Navigation() {
                   exit="exit"
                   type="button"
                   onClick={() => setSectionIndex(section.index)}
-                  className="text-theme-primary"
                 >
-                  {section.title}
+                  <span className="hover:tracking-widest transition-all delay-0 hoverable text-theme-primary ">
+                    {section.title}
+                  </span>
                 </motion.button>
 
                 <AnimatePresence>

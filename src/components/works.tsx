@@ -11,7 +11,7 @@ export default function Works() {
   const { subsectionIndex, isTransitioning } = useSection();
   const [currentWorkItem, setCurrentWorkItem] = useState(subsectionIndex);
 
-  const { cover, title, subject, description, link } =
+  const { cover, title, subject, description, link, techStack } =
     WORKS_ITEMS[currentWorkItem];
 
   useEffect(() => {
@@ -62,25 +62,37 @@ export default function Works() {
               animate="animate"
               custom={index * 0.2}
               variants={overlayVariants(index * 0.2)}
-              className={`absolute inset-0 h-full ${color} z-[${20 - index}]  `}
+              className={`absolute inset-0 h-full ${color} z-[${20 - index}]`}
               style={{ originX: 0 }}
             />
           ))}
         </div>
 
         <div className="relative flex flex-col max-w-lg lg:w-96 pt-5 pb-5 pr-4 lg:px-9 lg:pt-10 border-theme-accent lg:border-2 lg:right-28 rounded-3xl z-10">
-          <h4 className=" text-sm lg:text-lg text-theme-primary mb-3">
+          <h4 className="text-sm lg:text-lg text-theme-primary mb-1 lg:mb-3">
             {subject}
           </h4>
-          <h3 className=" text-2xl font-semibold text-white mb-3 lg:mb-14">
+          <h3 className="text-2xl font-bold text-white mb-2 lg:mb-14">
             {title}
           </h3>
-          <p className="h-32 text-white mb-5 lg:mb-24">{description}</p>
+          <p className="h-32 text-white mb-8 font-semibold">{description}</p>
+
+          <div className="flex flex-wrap gap-2 mb-4 lg:mb-8">
+            {techStack.map((tech, index) => (
+              <span
+                key={index}
+                className="bg-theme-background border-theme-primary border rounded-2xl text-theme-primary px-3 py-1 text-xs font-semibold"
+              >
+                {tech}
+              </span>
+            ))}
+          </div>
+
           <Link
             href={link}
             target="_blank"
             rel="noopener noreferrer"
-            className={`text-center bg-theme-primary text-theme-background text-sm font-medium px-6 py-2 rounded-xl ${
+            className={`text-center bg-theme-primary font-bold text-theme-background text-sm px-6 py-2 rounded-xl ${
               isTransitioning ? "" : "z-30 relative"
             }`}
           >
@@ -98,7 +110,7 @@ export default function Works() {
                 variants={overlayVariants(index * 0.1)}
                 className={`absolute lg:rounded-3xl inset-0 h-full ${color} z-[${
                   20 - index
-                }]  `}
+                }]`}
                 style={{ originX: 0 }}
               />
             ))}

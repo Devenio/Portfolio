@@ -31,19 +31,37 @@ export default function Socials({ className }: { className?: string }) {
       <Link
         href="https://www.linkedin.com/in/mahziyar-erfani-a713a718a/"
         target="_blank"
+        aria-label="Mahziyar Erfani's LinkedIn profile (opens in a new tab)"
       >
         <motion.div custom={0} variants={iconVariants}>
-          <LinkedinIcon className="fill-theme-primary hover:scale-105 transition-transform duration-200 delay-0  " />
+          <LinkedinIcon
+            className="fill-theme-primary hover:scale-125 transition-transform duration-200 delay-0"
+            aria-hidden="true"
+          />
         </motion.div>
       </Link>
-      <Link href="https://github.com/mhzrerfani" target="_blank">
+      <Link
+        href="https://github.com/mhzrerfani"
+        target="_blank"
+        aria-label="Mahziyar Erfani's GitHub profile (opens in a new tab)"
+      >
         <motion.div custom={1} variants={iconVariants}>
-          <GithubIcon className="fill-theme-primary hover:scale-105 transition-transform duration-200 delay-0  " />
+          <GithubIcon
+            className="fill-theme-primary hover:scale-125 transition-transform duration-200 delay-0"
+            aria-hidden="true"
+          />
         </motion.div>
       </Link>
-      <Link href="https://dribbble.com/mhzrerfani" target="_blank">
+      <Link
+        href="https://dribbble.com/mhzrerfani"
+        target="_blank"
+        aria-label="Mahziyar Erfani's Dribbble profile (opens in a new tab)"
+      >
         <motion.div custom={2} variants={iconVariants}>
-          <DribbbleIcon className="fill-theme-primary hover:scale-105 transition-transform duration-200 delay-0  " />
+          <DribbbleIcon
+            className="fill-theme-primary hover:scale-125 transition-transform duration-200 delay-0"
+            aria-hidden="true"
+          />
         </motion.div>
       </Link>
     </motion.div>

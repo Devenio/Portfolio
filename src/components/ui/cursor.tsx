@@ -28,7 +28,7 @@ export default function Cursor() {
       smallBallY.set(e.pageY - 5);
     };
 
-    const handleMouseEnter = () => scale.set(1.1);
+    const handleMouseEnter = () => scale.set(2);
     const handleMouseLeave = () => scale.set(1);
 
     document.addEventListener("mousemove", handleMouseMove);

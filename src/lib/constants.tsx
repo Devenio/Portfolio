@@ -1,9 +1,9 @@
 import { Section, SectionColors, Sections } from "./types";
 import Home from "@/components/home";
 import Works from "@/components/works";
-import MjolnirCover from "@/assets/images/mjolnir-cover.png";
-import AinurCover from "@/assets/images/ainur-cover.png";
-import JetonCover from "@/assets/images/jeton-cover.png";
+import MjolnirCover from "@/assets/images/mjolnir-cover.webp";
+import AinurCover from "@/assets/images/ainur-cover.webp";
+import JetonCover from "@/assets/images/jeton-cover.webp";
 import Experiences from "@/components/experiences";
 import Contact from "@/components/contact";
 
@@ -80,22 +80,25 @@ export const WORKS_ITEMS = [
     description:
       "Mjolnir is a platform forged in the spirit of Norse mythology, where the power of creation is placed in your hands. It's built with Svelte.",
     link: "https://mjolnir.ainurhq.cloud",
+    techStack: ["Svelte", "TypeScript", "Tailwind CSS"],
   },
   {
     cover: AinurCover,
     title: "Ainur",
     subject: "Prototyping and Design",
     description:
-      "Ainur is a Constancy agency that help startups and companies implement ideas and grow their businesses. This is a prototype for its landing page design.",
+      "Ainur is a Constancy agency that helps startups and companies implement ideas and grow their businesses. This is a prototype for its landing page design.",
     link: "https://www.figma.com/design/41igncAoFURohk6jIghEeu/Ainurhq-cloud?node-id=1-2&t=UmYufqh5Q4brfsWl-1",
+    techStack: ["Figma", "Design System", "Prototyping"],
   },
   {
     cover: JetonCover,
     title: "Jeton",
     subject: "Design and Implementation",
     description:
-      "Aptos Code Collision Hackathon Winner, Jeton is a decentralized poker platform designed to ensure fairness and transparency in online poker games. Built on the Aptos blockchain and for the web app built with Nextjs. ",
+      "Aptos Code Collision Hackathon Winner, Jeton is a decentralized poker platform designed to ensure fairness and transparency in online poker games. Built on the Aptos blockchain and for the web app built with Nextjs.",
     link: "https://jeton.pages.dev/",
+    techStack: ["Next.js", "Aptos Blockchain", "TypeScript"],
   },
 ];
 
