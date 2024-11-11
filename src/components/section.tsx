@@ -8,18 +8,6 @@ import { Direction } from "@/lib/types";
 export default function Section() {
   const { sectionIndex, navigationDirection } = useSection();
 
-  const variants = {
-    enter: (direction: Direction) => ({
-      opacity: 0,
-      y: direction === "down" ? 50 : -50,
-    }),
-    center: { opacity: 1, y: 0 },
-    exit: (direction: "up" | "down") => ({
-      opacity: 0,
-      y: direction === "down" ? -50 : 50,
-    }),
-  };
-
   return (
     <div className="h-full flex items-center justify-center   bg-theme-background">
       <AnimatePresence mode="wait" custom={navigationDirection}>
@@ -43,3 +31,15 @@ export default function Section() {
     </div>
   );
 }
+
+const variants = {
+  enter: (direction: Direction) => ({
+    opacity: 0,
+    y: direction === "down" ? 50 : -50,
+  }),
+  center: { opacity: 1, y: 0 },
+  exit: (direction: "up" | "down") => ({
+    opacity: 0,
+    y: direction === "down" ? -50 : 50,
+  }),
+};

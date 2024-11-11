@@ -21,54 +21,15 @@ export default function Navigation() {
   const [isHidden, setIsHidden] = useState(true);
 
   useEffect(() => {
-    // Set `isHidden` based on the initial screen size
-    setIsHidden(window.innerWidth < 1024); // `true` for mobile, `false` for desktop
+    setIsHidden(window.innerWidth < 1024);
   }, []);
-
-  const buttonVariants = {
-    hidden: { opacity: 0, x: 20 },
-    visible: (i: number) => ({
-      opacity: 1,
-      x: 0,
-      transition: {
-        delay: i * 0.2,
-        duration: ANIMATION_DURATION.MEDIUM,
-      },
-    }),
-    exit: {
-      opacity: 0,
-      x: 20,
-      transition: { duration: ANIMATION_DURATION.MEDIUM },
-    },
-  };
-
-  const indicatorVariants = {
-    hidden: { opacity: 0, y: -10 },
-    visible: (i: number) => ({
-      opacity: 1,
-      x: 0,
-      y: i * 42,
-      transition: {
-        type: "spring",
-        stiffness: 300,
-        damping: 30,
-        duration: 0.6,
-      },
-    }),
-    exit: {
-      opacity: 0,
-      y: -10,
-      transition: { duration: ANIMATION_DURATION.MEDIUM },
-    },
-  };
 
   const toggle = () => {
     setIsHidden((prev) => !prev);
   };
 
   return (
-    <div className="fixed top-5 sm:top-10 z-10 right-5 sm:right-10 transition-colors items-start flex gap-5">
-      {/* Desktop Navigation */}
+    <div className="fixed top-5 sm:top-10 right-5 sm:right-10 z-[999] transition-colors items-start flex gap-5">
       <AnimatePresence>
         {!isHidden && (
           <motion.div
@@ -136,7 +97,6 @@ export default function Navigation() {
         )}
       </AnimatePresence>
 
-      {/* Mobile Partial Overlay Navigation */}
       <AnimatePresence>
         {!isHidden && (
           <motion.div
@@ -146,12 +106,6 @@ export default function Navigation() {
             exit={{ opacity: 0, y: -100 }}
             transition={{ duration: ANIMATION_DURATION.MEDIUM }}
           >
-            <button
-              onClick={toggle}
-              className="absolute top-3 right-4 text-theme-primary text-xl"
-            >
-              Close
-            </button>
             {sectionNavigationOptions.map((section, i) => (
               <motion.div key={section.title} className="relative">
                 <motion.button
@@ -203,10 +157,9 @@ export default function Navigation() {
         )}
       </AnimatePresence>
 
-      {/* Toggle Button */}
       <div
         onClick={toggle}
-        className="flex flex-col justify-around w-10 h-8 cursor-pointer group"
+        className="flex flex-col z-30 justify-around w-10 h-8 cursor-pointer group"
       >
         {[0, 1, 2].map((i) => (
           <motion.div
@@ -223,3 +176,40 @@ export default function Navigation() {
     </div>
   );
 }
+
+const buttonVariants = {
+  hidden: { opacity: 0, x: 20 },
+  visible: (i: number) => ({
+    opacity: 1,
+    x: 0,
+    transition: {
+      delay: i * 0.2,
+      duration: ANIMATION_DURATION.MEDIUM,
+    },
+  }),
+  exit: {
+    opacity: 0,
+    x: 20,
+    transition: { duration: ANIMATION_DURATION.MEDIUM },
+  },
+};
+
+const indicatorVariants = {
+  hidden: { opacity: 0, y: -10 },
+  visible: (i: number) => ({
+    opacity: 1,
+    x: 0,
+    y: i * 42,
+    transition: {
+      type: "spring",
+      stiffness: 300,
+      damping: 30,
+      duration: 0.6,
+    },
+  }),
+  exit: {
+    opacity: 0,
+    y: -10,
+    transition: { duration: ANIMATION_DURATION.MEDIUM },
+  },
+};

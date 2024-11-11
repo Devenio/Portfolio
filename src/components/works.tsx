@@ -68,28 +68,26 @@ export default function Works() {
           ))}
         </div>
 
-        <div className="relative flex flex-col lg:w-96 pt-5 pb-5 pr-4 lg:pl-9 lg:pt-10 border-theme-accent lg:border-2 lg:right-28 rounded-3xl z-10">
-          <h4 className="work-subject text-sm lg:text-lg text-theme-primary mb-3">
+        <div className="relative flex flex-col max-w-lg lg:w-96 pt-5 pb-5 pr-4 lg:px-9 lg:pt-10 border-theme-accent lg:border-2 lg:right-28 rounded-3xl z-10">
+          <h4 className=" text-sm lg:text-lg text-theme-primary mb-3">
             {subject}
           </h4>
-          <h3 className="work-title text-2xl font-semibold text-white mb-3 lg:mb-14">
+          <h3 className=" text-2xl font-semibold text-white mb-3 lg:mb-14">
             {title}
           </h3>
-          <p className="work-description text-base text-white mb-5 lg:mb-24 lg:pr-5">
-            {description}
-          </p>
+          <p className="h-32 text-white mb-5 lg:mb-24">{description}</p>
           <Link
             href={link}
             target="_blank"
             rel="noopener noreferrer"
-            className={`lg:self-end self-start text-center bg-theme-primary text-theme-background text-sm font-medium px-6 py-2 rounded-xl ${
+            className={`text-center bg-theme-primary text-theme-background text-sm font-medium px-6 py-2 rounded-xl ${
               isTransitioning ? "" : "z-30 relative"
             }`}
           >
             Visit
           </Link>
 
-          <div className="absolute inset-0 h-full rounded-3xl bg-theme-background -z-10" />
+          <div className="absolute inset-0 h-full rounded-3xl bg-theme-background -z-10 lg:shadow-2xl" />
           <div className="absolute inset-0 h-full rounded-3xl mt-1 lg:mt-0 lg:overflow-hidden z-10">
             {overlayColors.map((color, index) => (
               <motion.div

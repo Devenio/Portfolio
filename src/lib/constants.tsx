@@ -4,6 +4,8 @@ import Works from "@/components/works";
 import MjolnirCover from "@/assets/images/mjolnir-cover.png";
 import AinurCover from "@/assets/images/ainur-cover.png";
 import JetonCover from "@/assets/images/jeton-cover.png";
+import Experiences from "@/components/experiences";
+import Contact from "@/components/contact";
 
 export const ANIMATION_DURATION = {
   SHORT: 0.2,
@@ -11,17 +13,15 @@ export const ANIMATION_DURATION = {
   LONG: 0.8,
 };
 
-export const WORK_SUBSECTIONS = 3;
-
 export const SECTIONS: Section[] = [
   { content: <Home />, title: "Home" },
   { content: <Works />, title: "Works" },
   {
-    content: <div className="text-theme-primary">Under construction :)</div>,
+    content: <Experiences />,
     title: "Experiences",
   },
   {
-    content: <div className="text-theme-primary">Under construction :)</div>,
+    content: <Contact />,
     title: "Contact",
   },
 ];
@@ -96,5 +96,18 @@ export const WORKS_ITEMS = [
     description:
       "Aptos Code Collision Hackathon Winner, Jeton is a decentralized poker platform designed to ensure fairness and transparency in online poker games. Built on the Aptos blockchain and for the web app built with Nextjs. ",
     link: "https://jeton.pages.dev/",
+  },
+];
+
+export const WORK_SUBSECTIONS = WORKS_ITEMS.length;
+
+export const experiences = [
+  { date: "Feb 2024", title: "Mootanroo", role: "Frontend Developer" },
+  { date: "Sep 2023", title: "Oyaz", role: "Frontend Developer" },
+  { date: "Jun 2021", title: "Ainur", role: "Co-founder, Frontend Developer" },
+  {
+    date: "Jul 2020",
+    title: "Freelance",
+    role: "Frontend Developer, UI Designer",
   },
 ];

@@ -43,6 +43,10 @@
   --foreground: #171717;
 }
 
+body {
+  cursor: none;
+}
+
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
@@ -52,7 +56,37 @@
 
 @layer base {
   * {
-    @apply transition-colors;
+    @apply transition-colors !cursor-none;
+  }
+}
+
+@layer components {
+  .hoverText {
+    @apply cursor-default;
+    transition: 0.3s font-weight, 0.3s color;
+  }
+
+  .hoverText:hover {
+    font-weight: 900;
+    color: var(--theme-primary);
+  }
+
+  .hoverText:hover + .hoverText {
+    font-weight: 500;
+    color: var(--theme-secondary);
+  }
+
+  .hoverText:hover + .hoverText + .hoverText {
+    font-weight: 300;
+  }
+
+  .hoverText:has(+ .hoverText:hover) {
+    font-weight: 500;
+    color: var(--theme-secondary);
+  }
+
+  .hoverText:has(+ .hoverText + .hoverText:hover) {
+    font-weight: 300;
   }
 }
 
@@ -66,5 +100,9 @@
       text-decoration-color, fill, stroke;
     transition-duration: 0.2s;
     transition-delay: 0.4s; /* value should be exact as animation config duration in constants */
+  }
+
+  .hoverable {
+    @apply cursor-none;
   }
 }

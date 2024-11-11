@@ -7,6 +7,7 @@ import { motion } from "framer-motion";
 import Socials from "./socials";
 import { ANIMATION_DURATION } from "@/lib/constants";
 import SectionTitle from "./section-title";
+import { BubbleText } from "./ui/bubble-text";
 
 export default function Frame() {
   const { sectionIndex } = useSection();
@@ -20,9 +21,9 @@ export default function Frame() {
           opacity: 1,
         }}
         transition={{ duration: ANIMATION_DURATION.MEDIUM, ease: "easeInOut" }}
-        className={`fixed top-5 sm:top-10 text-lg left-5 sm:left-10 sm:text-4xl text-white`}
+        className={`fixed top-5 sm:top-10 left-5 sm:left-10 z-20  `}
       >
-        Mahziyar Erfani
+        <BubbleText className="text-2xl sm:text-4xl" text="Mahziyar Erfani" />
       </motion.h1>
 
       <motion.p
