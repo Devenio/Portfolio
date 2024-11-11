@@ -1,8 +1,10 @@
 "use client";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { motion, useMotionValue, useSpring } from "framer-motion";
 
 export default function Cursor() {
+  const [isMobile, setIsMobile] = useState(false);
+
   const bigBallX = useMotionValue(0);
   const bigBallY = useMotionValue(0);
   const smallBallX = useMotionValue(0);
@@ -14,11 +16,6 @@ export default function Cursor() {
   const scale = useSpring(1, { stiffness: 150, damping: 10 });
 
   useEffect(() => {
-    const addHoverableClass = () => {
-      document.querySelectorAll("button, a").forEach((el) => {
-        el.classList.add("hoverable");
-      });
-    };
     addHoverableClass();
 
     const handleMouseMove = (e: MouseEvent) => {
@@ -46,6 +43,15 @@ export default function Cursor() {
     };
   }, [bigBallX, bigBallY, scale, smallBallX, smallBallY]);
 
+  useEffect(() => {
+    const isTouchDevice =
+      "ontouchstart" in window || navigator.maxTouchPoints > 0;
+    setIsMobile(isTouchDevice);
+  }, []);
+
+  if (isMobile) {
+    return null;
+  }
   return (
     <div className="pointer-events-none">
       <motion.div
@@ -79,3 +85,9 @@ export default function Cursor() {
     </div>
   );
 }
+
+const addHoverableClass = () => {
+  document.querySelectorAll("button, a").forEach((el) => {
+    el.classList.add("hoverable");
+  });
+};

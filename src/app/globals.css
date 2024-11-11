@@ -62,7 +62,6 @@ body {
 
 @layer components {
   .hoverText {
-    @apply cursor-default;
     transition: 0.3s font-weight, 0.3s color;
   }
 
@@ -100,9 +99,5 @@ body {
       text-decoration-color, fill, stroke;
     transition-duration: 0.2s;
     transition-delay: 0.4s; /* value should be exact as animation config duration in constants */
-  }
-
-  .hoverable {
-    @apply cursor-none;
   }
 }

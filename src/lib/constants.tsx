@@ -96,7 +96,7 @@ export const WORKS_ITEMS = [
     title: "Jeton",
     subject: "Design and Implementation",
     description:
-      "Aptos Code Collision Hackathon Winner, Jeton is a decentralized poker platform designed to ensure fairness and transparency in online poker games. Built on the Aptos blockchain and for the web app built with Nextjs.",
+      "Aptos Code Collision Hackathon Winner, Jeton is a decentralized poker platform designed to ensure fairness and transparency in online poker games.",
     link: "https://jeton.pages.dev/",
     techStack: ["Next.js", "Aptos Blockchain", "TypeScript"],
   },

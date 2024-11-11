@@ -62,7 +62,7 @@ export default function Navigation() {
                   type="button"
                   onClick={() => setSectionIndex(section.index)}
                 >
-                  <span className="hover:tracking-widest transition-all delay-0 hoverable text-theme-primary ">
+                  <span className="hover:tracking-widest transition-all delay-0 text-theme-primary px-2 py-1">
                     {section.title}
                   </span>
                 </motion.button>

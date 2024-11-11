@@ -44,7 +44,7 @@ export default function Home() {
         onClick={() => {
           setSectionIndex(Sections.Contact);
         }}
-        className="text-theme-background text-lg rounded-2xl bg-white text-theme-4 hover:bg-theme-accent font-semibold hover:text-white px-24 py-3 mt-5 delay-0 hoverable hover:px-28 active:brightness-80 hover:tracking-widest transition-all duration-500 hover:shadow-2xl shadow-white"
+        className="text-theme-background text-lg rounded-2xl bg-white text-theme-4 hover:bg-theme-accent font-semibold hover:text-white px-24 py-3 mt-5 delay-0 hover:px-28 active:brightness-80 hover:tracking-widest transition-all duration-500 hover:shadow-2xl shadow-white"
       >
         Contact me
       </button>

@@ -8,9 +8,11 @@ export const BubbleText = ({
   className?: string;
 }) => {
   return (
-    <div className={cn("text-center font-thin text-white", className)}>
+    <div
+      className={cn("text-center font-thin hoverable text-white", className)}
+    >
       {text.split("").map((child, idx) => (
-        <span className={"hoverText"} key={idx}>
+        <span className={"hoverText "} key={idx}>
           {child}
         </span>
       ))}

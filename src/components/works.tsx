@@ -92,7 +92,7 @@ export default function Works() {
             href={link}
             target="_blank"
             rel="noopener noreferrer"
-            className={`text-center bg-theme-primary font-bold text-theme-background text-sm px-6 py-2 rounded-xl ${
+            className={`text-center bg-theme-primary transition-all delay-0 hoverable hover:tracking-widest font-bold text-theme-background text-sm px-6 py-2 rounded-xl ${
               isTransitioning ? "" : "z-30 relative"
             }`}
           >
