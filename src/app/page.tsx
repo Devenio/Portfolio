@@ -6,13 +6,11 @@ import { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Mahziyar Erfani - Portfolio",
   description:
-    "Explore Mahziyar Erfani's portfolio, showcasing innovative projects such as Mjolnir, Ainur, and Jeton. Dive into each project’s design, technical creativity, and commitment to quality.",
+    "Discover the work and achievements of Mahziyar Erfani in web development and design.",
   openGraph: {
     title: "Mahziyar Erfani - Portfolio",
     description:
-      "Explore My portfolio, showcasing innovative projects like Mjolnir, Ainur, and Jeton. See the creativity and expertise behind each project.",
-    url: "https://mhzrerfani.dev",
-    siteName: "Mahziyar Erfani Portfolio",
+      "Explore Mahziyar Erfani's work in web development and design.",
     images: [
       {
         url: "https://mhzrerfani.dev/thumbnail.png",
@@ -28,7 +26,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Mahziyar Erfani - Portfolio",
     description:
-      "Explore My portfolio, showcasing innovative projects like Mjolnir, Ainur, and Jeton. See the creativity and expertise behind each project.",
+      "Explore Mahziyar Erfani's work in web development and design.",
     images: ["https://mhzrerfani.dev/thumbnail.png"],
   },
 };
