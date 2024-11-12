@@ -15,10 +15,17 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en">
+    <html lang="en" style={{ overflow: "hidden", height: "100%" }}>
       {GTM_ID && <GoogleTagManager gtmId={GTM_ID} />}
-      <body className={`${roboto.variable} h-dvh`}>
-        <div className="h-full relative overflow-hidden overscroll-none">
+      <body
+        className={`${roboto.variable} h-full touch-none`}
+        style={{
+          overflow: "hidden",
+          height: "100%",
+          WebkitOverflowScrolling: "auto",
+        }}
+      >
+        <div className="h-full w-full relative overflow-hidden overscroll-none">
           {children}
           <FuzzyOverlay />
           <Cursor />

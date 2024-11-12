@@ -68,14 +68,14 @@ export default function Works() {
           ))}
         </div>
 
-        <div className="relative flex flex-col max-w-lg lg:w-96 pt-5 pb-5 pr-4 lg:px-9 lg:pt-10 border-theme-accent lg:border-2 lg:right-28 rounded-3xl z-10">
+        <div className="relative flex flex-col md:max-w-lg lg:w-96 pt-5 pb-5 pr-4 lg:px-9 lg:pt-10 border-theme-accent lg:border-2 lg:right-28 rounded-3xl z-10">
           <h4 className="text-sm lg:text-lg text-theme-primary mb-1 lg:mb-3">
             {subject}
           </h4>
           <h3 className="text-2xl font-bold text-white mb-2 lg:mb-14">
             {title}
           </h3>
-          <p className="h-32 text-white mb-8 font-semibold">{description}</p>
+          <p className="h-20 text-white mb-8 font-semibold">{description}</p>
 
           <div className="flex flex-wrap gap-2 mb-4 lg:mb-8">
             {techStack.map((tech, index) => (

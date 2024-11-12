@@ -19,7 +19,7 @@ export const SectionContext = createContext<SectionContextType | undefined>(
 );
 
 const TRANSITION_DURATION = ANIMATION_DURATION.MEDIUM * 3000;
-const SWIPE_THRESHOLD = 50;
+const SWIPE_THRESHOLD = 30;
 
 export const SectionProvider = ({
   children,
