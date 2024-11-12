@@ -6,11 +6,12 @@ import Figure from "@/assets/images/figure-2.webp";
 
 export default function NeonFigure() {
   return (
-    <div className="relative flex items-center justify-center w-full h-full overflow-hidden">
+    <div className="relative flex items-center justify-center w-[291px] h-[388px] overflow-hidden">
       <Image
         src={Figure}
         alt="Julius Caesar Figure"
         className="relative z-20 object-cover w-full h-full"
+        priority
       />
 
       <motion.svg
