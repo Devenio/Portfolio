@@ -87,6 +87,12 @@ body {
   .hoverText:has(+ .hoverText + .hoverText:hover) {
     font-weight: 300;
   }
+
+  .neon-path {
+    @apply stroke-current text-cyan-400 stroke-[2px];
+    filter: drop-shadow(0 0 6px #0ff) drop-shadow(0 0 12px #0ff);
+    animation: neon-glow 1.5s ease-in-out infinite alternate;
+  }
 }
 
 @layer utilities {
@@ -99,5 +105,14 @@ body {
       text-decoration-color, fill, stroke;
     transition-duration: 0.2s;
     transition-delay: 0.4s; /* value should be exact as animation config duration in constants */
+  }
+}
+
+@keyframes neon-glow {
+  from {
+    filter: drop-shadow(0 0 8px #0ff) drop-shadow(0 0 16px #0ff);
+  }
+  to {
+    filter: drop-shadow(0 0 16px #0ff) drop-shadow(0 0 32px #0ff);
   }
 }
