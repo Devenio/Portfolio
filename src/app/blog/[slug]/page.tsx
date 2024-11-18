@@ -49,7 +49,7 @@ export async function generateMetadata({
     const domain =
         process.env.NEXT_PUBLIC_WEBSITE_DOMAIN;
     const url = `${domain}/blog/${slug}`;
-    const image = `${domain}/blog/${post.metadata.cover}`;
+    const image = `${domain}${post.metadata.cover}`;
 
     return {
         title: post.metadata.title,
