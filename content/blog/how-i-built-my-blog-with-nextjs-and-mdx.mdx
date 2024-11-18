@@ -1,0 +1,363 @@
+---
+title: 'How I Built My Blog with Next.js and MDX'
+date: '2024-11-18'
+description: 'An overview of how I implemented a fully dynamic blog using Next.js App Router, MDX, and custom components, optimized for performance and scalability.'
+keywords: ['Next.js', 'MDX', 'React', 'Blog', 'Frontend Development']
+cover: '/blog/how-i-built-my-blog-with-nextjs-and-mdx.png'
+---
+
+Creating a blog from scratch is an exciting challenge that combines creativity with technical skills. Recently, I developed a dynamic and interactive blog using **Next.js App Router**, **MDX**, and tailored components, designed for flexibility, performance, and an engaging user experience. In this guide, I’ll walk you through the entire process step by step, sharing insights and techniques that made this project a success.
+
+## **Introduction**
+
+The blog was designed with the following goals:
+
+- **Content Flexibility**: Use MDX to combine Markdown with React components.
+- **Performance Optimization**: Utilize Next.js’s server-side rendering (SSR) and static site generation (SSG) features for speed.
+- **Custom Styling**: Leverage Tailwind CSS for a polished design.
+- **SEO**: Include metadata tags for every post.
+
+By the end of this process, I had a fully functional blog where posts are written in MDX, dynamically rendered, and styled with reusable components.
+
+## **Packages Installed**
+
+Here are the key packages I used and why they were necessary:
+
+- **`gray-matter`**
+  Parses frontmatter metadata (e.g., title, date, description) from MDX files, making it easy to extract and use in the application.
+
+- **`next-mdx-remote`**
+  Enables server-side and static rendering of MDX content. Essential for fetching MDX content at runtime or build time and rendering it dynamically.
+
+- **`prismjs`**
+  A lightweight syntax highlighting library for rendering beautifully highlighted code blocks.
+
+```bash
+  npm install gray-matter prismjs next-mdx-remote
+```
+
+These packages formed the backbone of my blog implementation, allowing me to seamlessly integrate Markdown content, style it effectively, and enhance SEO.
+
+> This implementation assumes that **Tailwind CSS** is already set up in your project. If you haven’t configured Tailwind yet, please set it up before proceeding. Tailwind is used extensively for styling the blog, ensuring consistency and responsiveness across all components.
+
+## **Step 1: Setting Up File Structure**
+
+To keep the project organized, I structured the blog directory as follows:
+
+### Key Points:
+
+- **`content/blog/`**: Stores all MDX files. Each file includes frontmatter metadata (e.g., `title`, `description`, `date`) and the post content.
+- **`[slug]/page.tsx`**: Dynamic route for rendering individual blog posts.
+- **`lib/posts.ts`**: Utility functions to fetch and process blog posts.
+- **`components/`**: Contains reusable components like `BlogCard` and `CodeBlock`.
+
+## **Step 2: Parsing and Organizing Blog Posts**
+
+To fetch blog posts and each post, I wrote utility functions in `lib/posts.ts` using **fs** and **gray-matter**:
+
+```typescript
+import fs from 'fs';
+import path from 'path';
+import matter from 'gray-matter';
+import { estimateReadingTime } from './utils';
+import { PostContent, PostMetadata } from './types';
+
+const postsDirectory = path.join(process.cwd(), 'content/blog');
+
+export function getAllPosts(): PostMetadata[] {
+ const files = fs.readdirSync(postsDirectory);
+
+ return files.map((filename) => {
+  const filePath = path.join(postsDirectory, filename);
+  const fileContents = fs.readFileSync(filePath, 'utf8');
+  const { content, data } = matter(fileContents);
+
+  return {
+   slug: filename.replace(/\.mdx?$/, ''),
+   title: data.title || 'Untitled',
+   readingTime: estimateReadingTime(content),
+   // Other properties
+  };
+ });
+}
+
+export function getPostBySlug(slug: string): PostContent {
+ const filePath = path.join(postsDirectory, `${slug}.mdx`);
+ const fileContents = fs.readFileSync(filePath, 'utf8');
+ const { content, data } = matter(fileContents);
+
+ return {
+  content,
+  metadata: {
+   slug,
+   // Other properties
+  },
+ };
+}
+```
+
+The reading time estimate is a small but impactful feature that provides readers with an idea of how long it will take to read each blog post. This information is calculated based on the length of the content and displayed prominently alongside other metadata.
+
+```typescript
+export function estimateReadingTime(content: string): string {
+ if (!content) return '0 min read';
+
+ const words = content.split(/\s+/).length;
+ const minutes = Math.ceil(words / 200);
+ return `${minutes} min read`;
+}
+```
+
+The blog posts list page serves as the entry point for the blog, dynamically displaying all available posts. It uses metadata from MDX files to generate a clean and organized overview of blog entries.
+
+```typescript
+import { getAllPosts } from '@/lib/posts';
+import Link from 'next/link';
+
+export default function BlogPage() {
+ const posts = getAllPosts();
+
+ return (
+  <>
+   <h1 className="text-6xl text-center font-bold text-theme-primary my-10">
+    Blog
+   </h1>
+   <div className="space-y-6">
+    {posts.map((post) => (
+     <Link
+      href={`/blog/${post.slug}`}
+      key={post.slug}
+      className="p-5 block rounded-2xl border border-theme-accent shadow-xl hover:shadow-2xl duration-300 transition-all delay-0 hover:border-white"
+     >
+      <h2 className="text-2xl font-bold text-white">{post.title}</h2>
+      <small className="text-theme-secondary">{post.date}</small>
+      <p className="text-theme-primary my-3">{post.description}</p>
+      {post.keywords.map((keyword) => (
+       <span
+        className="mr-2 bg-theme-accent px-2 py-1 text-sm rounded-2xl text-theme-primary"
+        key={keyword}
+       >
+        {keyword}
+       </span>
+      ))}
+     </Link>
+    ))}
+   </div>
+  </>
+ );
+}
+```
+
+## **Step 3: Dynamic Routes Setup and Rendering Blog Content**
+
+To render individual blog posts, I utilized dynamic routing in the `src/app/blog/[slug]/page.tsx` file. Each MDX file corresponds to a unique slug used to fetch and display the blog post. To render the blog content, I integrated **next-mdx-remote** for processing and rendering MDX files.
+
+```typescript
+import { MDXRemote } from 'next-mdx-remote/rsc';
+import { MDXComponents } from '@/components/MDXComponents';
+import { getPostBySlug } from '@/lib/posts';
+
+type BlogPostPageProps = {
+ params: { slug: string };
+};
+
+export async function generateStaticParams() {
+ const posts = getAllPosts();
+ return posts.map((post) => ({ slug: post.slug }));
+}
+
+export default async function BlogPostPage({ params }: BlogPostPageProps) {
+ const { content, metadata } = getPostBySlug(params.slug);
+
+ return (
+  <article>
+   <h1>{metadata.title}</h1>
+   // Other metadata
+   <div>
+    <MDXRemote source={content} components={MDXComponents} />
+   </div>
+  </article>
+ );
+}
+```
+
+- **MDX Content Rendering**: The `MDXRemote` component dynamically renders the MDX content fetched from the post.
+
+- **Custom Components**: Supports custom styling and functionality by passing `MDXComponents` to `MDXRemote`.
+
+- **Seamless Integration**: Allows mixing React components and Markdown in the blog content.
+
+## **MDXComponents: Custom Styling for MDX Elements**
+
+To ensure a consistent look across blog posts, I created an `MDXComponents` object. This object maps default MDX elements (e.g., `h1`, `p`, `code`) to React components styled with Tailwind CSS. The `MDXComponents` object is passed to the `components` prop of `MDXRemote`.
+
+```typescript
+import React from 'react';
+import CodeBlock from './code-block';
+import { MDXProvider } from '@mdx-js/react';
+
+export const MDXComponents: React.ComponentProps<
+ typeof MDXProvider
+>['components'] = {
+ h1: (props: React.HTMLAttributes<HTMLHeadingElement>) => (
+  <h1 className="text-4xl font-bold text-theme-primary my-6" {...props} />
+ ),
+ code: ({
+  className,
+  children,
+ }: {
+  className?: string;
+  children?: React.ReactNode;
+ }) =>
+  className ? (
+   <CodeBlock language={className.replace('language-', '')}>
+    {children}
+   </CodeBlock>
+  ) : (
+   <code className="bg-theme-secondary text-theme-background px-1 py-0.5 rounded">
+    {children}
+   </code>
+  ),
+ pre: (props: React.HTMLAttributes<HTMLPreElement>) => (
+  <pre
+   className="bg-theme-background text-theme-secondary p-0 overflow-x-auto my-4"
+   {...props}
+  />
+ ),
+ // Other elements
+};
+```
+
+- **Custom Styling**: Applies consistent styles for elements like `h1`, `h2`, `blockquote`, and `code` using Tailwind CSS classes.
+
+- **Code Block Support**: Integrates the `CodeBlock` component to render code snippets with syntax highlighting and copy-to-clipboard functionality.
+
+- **Reusable Across Posts**: Centralizes element styling to maintain a uniform appearance across all blog posts.
+
+## **CodeBlock Component: Enhanced Code Rendering**
+
+The `CodeBlock` component is designed to render code snippets with syntax highlighting and a built-in copy-to-clipboard functionality. It uses **Prism.js** for syntax highlighting and supports various programming languages.
+
+```typescript
+'use client';
+
+import { useState, useEffect } from 'react';
+import Prism from 'prismjs';
+
+import 'prismjs/themes/prism-tomorrow.css';
+import 'prismjs/components/prism-javascript';
+import 'prismjs/components/prism-typescript';
+import 'prismjs/components/prism-css';
+import 'prismjs/components/prism-json';
+
+type CodeBlockProps = {
+ children: React.ReactNode;
+ language?: string;
+};
+
+export default function CodeBlock({
+ children,
+ language = 'typescript',
+}: CodeBlockProps) {
+ const [copied, setCopied] = useState(false);
+
+ useEffect(() => {
+  Prism.highlightAll();
+ }, []);
+
+ const handleCopy = () => {
+  navigator.clipboard.writeText((children as string).trim());
+  setCopied(true);
+  setTimeout(() => setCopied(false), 2000);
+ };
+
+ return (
+  <div className="relative group bg-theme-background pt-6 rounded-lg text-theme-foreground">
+   {language && (
+    <span className="absolute top-2 left-2 text-xs font-semibold uppercase text-theme-secondary">
+     {language}
+    </span>
+   )}
+
+   <button
+    onClick={handleCopy}
+    className="absolute top-10 delay-0 right-2 text-sm text-theme-primary border border-theme-primary px-2 py-1 rounded-md opacity-0 group-hover:opacity-100 transition-opacity"
+   >
+    {copied ? 'Copied!' : 'Copy'}
+   </button>
+
+   <pre className="overflow-auto rounded-lg">
+    <code className={`language-${language}`}>
+     {(children as string).trim()}
+    </code>
+   </pre>
+  </div>
+ );
+}
+```
+
+- **Syntax Highlighting**: Uses **Prism.js** to highlight code in languages like JavaScript, TypeScript, CSS, and JSON.
+
+- **Copy-to-Clipboard Functionality**: Allows users to easily copy code snippets with a dedicated button that dynamically updates its label to "Copied!" upon use.
+
+- **Dynamic Language Detection**: Supports different languages by applying appropriate classes (`language-{language}`) for highlighting.
+
+### **Optimizing for SEO**
+
+SEO (Search Engine Optimization) is a critical aspect of building a blog, as it ensures your content reaches the right audience through search engines. In this implementation, I focused on optimizing each blog post for better visibility and engagement.
+
+```typescript
+export async function generateMetadata({
+ params,
+}: BlogPostPageProps): Promise<Metadata> {
+ const post = getPostBySlug(params.slug);
+ const domain = process.env.NEXT_PUBLIC_WEBSITE_DOMAIN;
+ const url = `${domain}/blog/${post.metadata.slug}`;
+ const image = `${domain}${post.metadata.cover}`;
+
+ return {
+  title: post.metadata.title,
+  description: post.metadata.description,
+  keywords: post.metadata.keywords.join(', '),
+  authors: [{ name: 'Mahziyar Erfani' }],
+  // Other properties
+ };
+}
+```
+
+### **Conclusion**
+
+Building a blog with Next.js and MDX offers a powerful and flexible approach to creating dynamic content-driven websites. By leveraging utilities like `fs` for file handling, `gray-matter` for frontmatter parsing, and tools like Tailwind CSS for styling, you can create a streamlined and performant blogging platform. Additionally, integrating features like reading time estimates and metadata enhances the user experience and search engine optimization (SEO). This setup provides scalability and ease of maintenance, making it ideal for personal projects or professional portfolios.
+
+---
+
+### **Other Approaches for Creating a Blog**
+
+While this implementation is robust and highly customizable, there are alternative approaches depending on your project's requirements:
+
+**Static Site Generators (SSGs)**
+
+- Tools like **Gatsby** or **Hugo** are purpose-built for static blogs.
+- They provide built-in MDX support, plugins, and preconfigured performance optimizations.
+
+**Headless CMS**
+
+- Use platforms like **Sanity**, **Contentful**, or **Strapi** to manage blog content via a CMS.
+- This approach separates content management from code and is ideal for blogs requiring frequent updates or collaboration.
+
+**API-Driven Blogs**
+
+- Store blog content in a database (e.g., Firebase or MongoDB) and fetch it via an API.
+- This is useful for dynamic blogs with user-generated content or advanced features like search and filtering.
+
+**Markdown-Only Blogs**
+
+- Use pure Markdown files without MDX and render them with a library like `remark`.
+- This is a simpler alternative for blogs without React component integrations.
+
+**Server-Side Content Management**
+
+- Integrate a CMS like WordPress or Ghost with a frontend built in Next.js or React.
+- Allows for a fully managed backend with a custom frontend.
+
+Each approach has its pros and cons, and the choice depends on factors like complexity, scalability, and your familiarity with the tools. The Next.js + MDX setup described here strikes a balance between flexibility and performance, making it an excellent choice for developers who want to blend dynamic React components with static Markdown content.

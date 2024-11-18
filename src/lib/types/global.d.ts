@@ -1,1 +1,1 @@
-declare module "powerglitch";
+declare module 'powerglitch';

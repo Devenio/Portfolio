@@ -3,116 +3,114 @@
 @tailwind utilities;
 
 :root {
-  /* Theme */
-  --theme-background: var(--theme-1-background);
-  --theme-primary: var(--theme-1-primary);
-  --theme-secondary: var(--theme-1-secondary);
-  --theme-accent: var(--theme-1-accent);
+ /* Theme */
+ --theme-background: var(--theme-1-background);
+ --theme-primary: var(--theme-1-primary);
+ --theme-secondary: var(--theme-1-secondary);
+ --theme-accent: var(--theme-1-accent);
 
-  /* main */
-  --theme-1-background: #433878;
-  --theme-1-primary: #ffe1ff;
-  --theme-1-secondary: #e4b1f0;
-  --theme-1-accent: #7e60bf;
+ /* main */
+ --theme-1-background: #433878;
+ --theme-1-primary: #ffe1ff;
+ --theme-1-secondary: #e4b1f0;
+ --theme-1-accent: #7e60bf;
 
-  /* mjolnir */
-  --theme-2-background: #9d174d;
-  --theme-2-primary: #f8d3e2;
-  --theme-2-secondary: #ffffff;
-  --theme-2-accent: #ffffff;
+ /* mjolnir */
+ --theme-2-background: #9d174d;
+ --theme-2-primary: #f8d3e2;
+ --theme-2-secondary: #ffffff;
+ --theme-2-accent: #ffffff;
 
-  /* ainur */
-  --theme-3-background: #437a7d;
-  --theme-3-primary: #ddeae1;
-  --theme-3-secondary: #ddeae1;
-  --theme-3-accent: #35454f;
+ /* ainur */
+ --theme-3-background: #437a7d;
+ --theme-3-primary: #ddeae1;
+ --theme-3-secondary: #ddeae1;
+ --theme-3-accent: #35454f;
 
-  /* jeton */
-  --theme-4-background: #ac704d;
-  --theme-4-primary: #efe3dc;
-  --theme-4-secondary: #efe3dc;
-  --theme-4-accent: #c08f72;
+ /* jeton */
+ --theme-4-background: #ac704d;
+ --theme-4-primary: #efe3dc;
+ --theme-4-secondary: #efe3dc;
+ --theme-4-accent: #c08f72;
 
-  /* experiences */
-  --theme-5-background: #427e9e;
-  --theme-5-primary: #ddf2fd;
-  --theme-5-secondary: #9bbec8;
-  --theme-5-accent: #1e6186;
+ /* experiences */
+ --theme-5-background: #427e9e;
+ --theme-5-primary: #ddf2fd;
+ --theme-5-secondary: #9bbec8;
+ --theme-5-accent: #1e6186;
 
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-body {
-  cursor: none;
+ --background: #ffffff;
+ --foreground: #171717;
 }
 
 @media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+ :root {
+  --background: #0a0a0a;
+  --foreground: #ededed;
+ }
 }
 
 @layer base {
-  * {
-    @apply transition-colors !cursor-none;
-  }
+ * {
+  @apply transition-colors;
+ }
 }
 
 @layer components {
-  .hoverText {
-    transition: 0.3s font-weight, 0.3s color;
-  }
+ .hoverText {
+  transition:
+   0.3s font-weight,
+   0.3s color;
+ }
 
-  .hoverText:hover {
-    font-weight: 900;
-    color: var(--theme-primary);
-  }
+ .hoverText:hover {
+  font-weight: 900;
+  color: var(--theme-primary);
+ }
 
-  .hoverText:hover + .hoverText {
-    font-weight: 500;
-    color: var(--theme-secondary);
-  }
+ .hoverText:hover + .hoverText {
+  font-weight: 500;
+  color: var(--theme-secondary);
+ }
 
-  .hoverText:hover + .hoverText + .hoverText {
-    font-weight: 300;
-  }
+ .hoverText:hover + .hoverText + .hoverText {
+  font-weight: 300;
+ }
 
-  .hoverText:has(+ .hoverText:hover) {
-    font-weight: 500;
-    color: var(--theme-secondary);
-  }
+ .hoverText:has(+ .hoverText:hover) {
+  font-weight: 500;
+  color: var(--theme-secondary);
+ }
 
-  .hoverText:has(+ .hoverText + .hoverText:hover) {
-    font-weight: 300;
-  }
+ .hoverText:has(+ .hoverText + .hoverText:hover) {
+  font-weight: 300;
+ }
 
-  .neon-path {
-    @apply stroke-current text-cyan-400 stroke-[2px];
-    filter: drop-shadow(0 0 6px #0ff) drop-shadow(0 0 12px #0ff);
-    animation: neon-glow 1.5s ease-in-out infinite alternate;
-  }
+ .neon-path {
+  @apply stroke-current text-cyan-400 stroke-[2px];
+  filter: drop-shadow(0 0 6px #0ff) drop-shadow(0 0 12px #0ff);
+  animation: neon-glow 1.5s ease-in-out infinite alternate;
+ }
 }
 
 @layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
+ .text-balance {
+  text-wrap: balance;
+ }
 
-  .transition-colors {
-    transition-property: color, background-color, border-color,
-      text-decoration-color, fill, stroke;
-    transition-duration: 0.2s;
-    transition-delay: 0.4s; /* value should be exact as animation config duration in constants */
-  }
+ .transition-colors {
+  transition-property: color, background-color, border-color,
+   text-decoration-color, fill, stroke;
+  transition-duration: 0.2s;
+  transition-delay: 0.4s; /* value should be exact as animation config duration in constants */
+ }
 }
 
 @keyframes neon-glow {
-  from {
-    filter: drop-shadow(0 0 8px #0ff) drop-shadow(0 0 16px #0ff);
-  }
-  to {
-    filter: drop-shadow(0 0 16px #0ff) drop-shadow(0 0 32px #0ff);
-  }
+ from {
+  filter: drop-shadow(0 0 8px #0ff) drop-shadow(0 0 16px #0ff);
+ }
+ to {
+  filter: drop-shadow(0 0 16px #0ff) drop-shadow(0 0 32px #0ff);
+ }
 }
