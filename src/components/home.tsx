@@ -4,15 +4,45 @@ import IntroFigure from '@/assets/images/intro-figure.webp';
 import { useSection } from '@/lib/hooks';
 import { Sections } from '@/lib/types';
 import Image from 'next/image';
-import { PowerGlitch } from 'powerglitch';
 import { useEffect } from 'react';
 import { BubbleText } from './ui/bubble-text';
+
+const glitchConfig = {
+    playMode: 'always',
+    createContainers: true,
+    hideOverflow: false,
+    timing: {
+        duration: 3950,
+    },
+    glitchTimeSpan: {
+        start: 0.5,
+        end: 0.7,
+    },
+    shake: {
+        velocity: 15,
+        amplitudeX: 0.2,
+        amplitudeY: 0.2,
+    },
+    slice: {
+        count: 6,
+        velocity: 15,
+        minHeight: 0.02,
+        maxHeight: 0.15,
+        hueRotate: true,
+    },
+    pulse: false,
+};
 
 export default function Home() {
     const { setSectionIndex } = useSection();
 
     useEffect(() => {
-        PowerGlitch.glitch('#cover', glitchConfig);
+        const loadGlitch = async () => {
+            const { PowerGlitch } = await import('powerglitch');
+            PowerGlitch.glitch('#cover', glitchConfig);
+        };
+
+        loadGlitch();
     }, []);
 
     return (
@@ -44,36 +74,10 @@ export default function Home() {
                 onClick={() => {
                     setSectionIndex(Sections.Contact);
                 }}
-                className="text-theme-background text-lg rounded-2xl bg-white text-theme-4 hover:bg-theme-accent font-semibold hover:text-white px-24 py-3 mt-5 delay-0 hover:px-28 hoverable  active:brightness-80 hover:tracking-widest transition-all duration-500 hover:shadow-2xl shadow-white"
+                className="text-theme-background text-lg rounded-2xl bg-white text-theme-4 hover:bg-theme-accent font-semibold hover:text-white px-24 py-3 mt-5 delay-0 hover:px-28 hoverable active:brightness-80 hover:tracking-widest transition-all duration-500 hover:shadow-2xl shadow-white"
             >
                 Contact me
             </button>
         </div>
     );
 }
-
-const glitchConfig = {
-    playMode: 'always',
-    createContainers: true,
-    hideOverflow: false,
-    timing: {
-        duration: 3950,
-    },
-    glitchTimeSpan: {
-        start: 0.5,
-        end: 0.7,
-    },
-    shake: {
-        velocity: 15,
-        amplitudeX: 0.2,
-        amplitudeY: 0.2,
-    },
-    slice: {
-        count: 6,
-        velocity: 15,
-        minHeight: 0.02,
-        maxHeight: 0.15,
-        hueRotate: true,
-    },
-    pulse: false,
-};
