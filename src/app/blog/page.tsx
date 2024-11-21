@@ -1,16 +1,21 @@
 import { getAllPosts } from '@/lib/posts';
 import Link from 'next/link';
-import Curves from '../../components/curves';
+import Curves from '@/components/curves';
 
 export default function BlogPage() {
     const posts = getAllPosts();
 
     return (
         <>
-            <h1 className="text-4xl font-bold text-theme-primary my-10">
+
+            <header className='flex items-center gap-5  my-10'> <h1 className="text-4xl font-bold text-theme-primary">
                 {`Mahziyar Erfani's Blog`}
             </h1>
-            <div className="space-y-6 relative z-20">
+                <Link className='text-theme-secondary text-xl z-10 relative' href="/" >Go to portfolio</Link>
+
+            </header>
+
+            <main className="space-y-6 relative z-20">
                 {posts.map((post) => (
                     <Link
                         href={`/blog/${post.slug}`}
@@ -30,7 +35,7 @@ export default function BlogPage() {
                         ))}
                     </Link>
                 ))}
-            </div>
+            </main>
             <Curves />
         </>
     );
