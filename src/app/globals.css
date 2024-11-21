@@ -66,7 +66,9 @@
 
 @layer components {
  .hoverText {
-  transition: 0.3s font-weight, 0.3s color;
+  transition:
+   0.3s font-weight,
+   0.3s color;
  }
 
  .hoverText:hover {

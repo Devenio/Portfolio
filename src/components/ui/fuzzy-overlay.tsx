@@ -3,25 +3,25 @@
 import { motion } from 'framer-motion';
 
 export const FuzzyOverlay = () => {
-    return (
-        <motion.div
-            initial={{ transform: 'translateX(-10%) translateY(-10%)' }}
-            animate={{
-                transform: 'translateX(10%) translateY(10%)',
-            }}
-            transition={{
-                repeat: Infinity,
+ return (
+  <motion.div
+   initial={{ transform: 'translateX(-10%) translateY(-10%)' }}
+   animate={{
+    transform: 'translateX(10%) translateY(10%)',
+   }}
+   transition={{
+    repeat: Infinity,
 
-                duration: 0.1,
+    duration: 0.1,
 
-                ease: 'linear',
+    ease: 'linear',
 
-                repeatType: 'mirror',
-            }}
-            style={{
-                backgroundImage: 'url("/noise.webp")',
-            }}
-            className="pointer-events-none absolute -inset-[100%] opacity-[15%]"
-        />
-    );
+    repeatType: 'mirror',
+   }}
+   style={{
+    backgroundImage: 'url("/noise.webp")',
+   }}
+   className="pointer-events-none absolute -inset-[100%] opacity-[15%]"
+  />
+ );
 };
