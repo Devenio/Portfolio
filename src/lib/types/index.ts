@@ -1,49 +1,49 @@
 export type Direction = 'up' | 'down';
 
 export enum Sections {
- Home = 0,
- Works = 1,
- Experience = 2,
- Contact = 3,
+    Home = 0,
+    Works = 1,
+    Experience = 2,
+    Contact = 3,
 }
 
 export type Section = {
- content: React.ReactNode;
- title: string;
+    content: React.ReactNode;
+    title: string;
 };
 
 export type SectionContextType = {
- sectionIndex: number;
- subsectionIndex: number;
- setSectionIndex: (index: number) => void;
- navigationDirection: Direction;
- setSubsectionIndex: (index: number) => void;
- isTransitioning: boolean;
+    sectionIndex: number;
+    subsectionIndex: number;
+    setSectionIndex: (index: number) => void;
+    navigationDirection: Direction;
+    setSubsectionIndex: (index: number) => void;
+    isTransitioning: boolean;
 };
 
 export type SectionColors = {
- background: string;
- primary: string;
- secondary: string;
- accent: string;
+    background: string;
+    primary: string;
+    secondary: string;
+    accent: string;
 };
 
 export type SectionWithIndex = {
- title: string;
- index: number;
+    title: string;
+    index: number;
 };
 
 export type PostMetadata = {
- title: string;
- description: string;
- date: string;
- cover: string;
- slug: string;
- readingTime: string;
- keywords: string[];
+    title: string;
+    description: string;
+    date: string | Date;
+    cover: string;
+    slug: string;
+    readingTime: string;
+    keywords: string[];
 };
 
 export type PostContent = {
- content: string;
- metadata: PostMetadata;
+    content: string;
+    metadata: PostMetadata;
 };
