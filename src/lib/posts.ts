@@ -18,7 +18,7 @@ export function getAllPosts(): PostMetadata[] {
    slug: filename.replace(/\.mdx?$/, ''),
    title: data.title || 'Untitled',
    description: data.description || 'No description available.',
-   date: data.date ? new Date(data.date) : new Date(0), // Use Date object for sorting
+   date: data.date || 'Unknown date',
    cover: data.cover || '/thumbnail.png',
    readingTime: estimateReadingTime(content),
    keywords: data.keywords || [],
@@ -26,7 +26,11 @@ export function getAllPosts(): PostMetadata[] {
  });
 
  // Sort posts by date in descending order (newest first)
- return posts.sort((a, b) => b.date.getTime() - a.date.getTime());
+ return posts.sort((a, b) => {
+  const dateA = typeof a.date === 'string' ? new Date(a.date) : a.date;
+  const dateB = typeof b.date === 'string' ? new Date(b.date) : b.date;
+  return dateB.getTime() - dateA.getTime();
+ });
 }
 
 export function getPostBySlug(slug: string): PostContent {

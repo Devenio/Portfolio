@@ -50,7 +50,7 @@ export default function Home() {
    <div className="relative flex items-center justify-center sm:mt-20">
     <BubbleText
      className="text-[calc(100vw/6)] font-light text-theme-primary -z-10 absolute"
-     text="MAHZIYAR"
+     text="NIMA"
     />
 
     <Image
