@@ -25,7 +25,7 @@ export default function Page() {
 }
 
 export const metadata: Metadata = {
- title: 'Mahziyar Erfani | Portfolio',
+ title: 'Pernova | Coming Soon...',
  description:
   "Learn about Mahziyar Erfani's journey in web development and design, explore his projects, and stay updated through his blog, where he shares insights and experiences from his work.",
  openGraph: {

@@ -50,7 +50,7 @@ export default function Home() {
    <div className="relative flex items-center justify-center sm:mt-20">
     <BubbleText
      className="text-[calc(100vw/6)] font-light text-theme-primary -z-10 absolute"
-     text="NIMA"
+     text="PERNOVA"
     />
 
     <Image
@@ -64,19 +64,15 @@ export default function Home() {
    </div>
 
    <p className="text-2xl mt-10 sm:text-4xl text-white sm:mt-2 text-center">
-    Let’s create
-    <span className="text-theme-primary">
-     <i>{` cool `}</i>
-    </span>
-    stuff together
+    Think big. Big moves are coming...
    </p>
    <button
     onClick={() => {
      setSectionIndex(Sections.Contact);
     }}
-    className="text-theme-background text-lg rounded-2xl bg-white text-theme-4 hover:bg-theme-accent font-semibold hover:text-white px-24 py-3 mt-5 delay-0 hover:px-28 hoverable active:brightness-80 hover:tracking-widest transition-all duration-500 hover:shadow-2xl shadow-white"
+    className="text-theme-background text-xl rounded-2xl bg-white text-theme-4 hover:bg-theme-accent font-semibold hover:text-white px-24 py-5 mt-10 delay-0 hover:px-28 hoverable active:brightness-80 hover:tracking-widest transition-all duration-500 hover:shadow-2xl shadow-white"
    >
-    Contact me
+    Open Community
    </button>
   </div>
  );

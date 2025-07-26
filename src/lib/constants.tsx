@@ -1,11 +1,8 @@
 import { Section, SectionColors, Sections } from './types';
 import Home from '@/components/home';
-import Works from '@/components/works';
 import MjolnirCover from '@/assets/images/mjolnir-cover.webp';
 import AinurCover from '@/assets/images/ainur-cover.webp';
 import JetonCover from '@/assets/images/jeton-cover.webp';
-import Experiences from '@/components/experiences';
-import Contact from '@/components/contact';
 
 export const ANIMATION_DURATION = {
  SHORT: 0.2,
@@ -15,15 +12,15 @@ export const ANIMATION_DURATION = {
 
 export const SECTIONS: Section[] = [
  { content: <Home />, title: 'Home' },
- { content: <Works />, title: 'Works' },
- {
-  content: <Experiences />,
-  title: 'Experiences',
- },
- {
-  content: <Contact />,
-  title: 'Contact',
- },
+//  { content: <Works />, title: 'Works' },
+//  {
+//   content: <Experiences />,
+//   title: 'Experiences',
+//  },
+//  {
+//   content: <Contact />,
+//   title: 'Contact',
+//  },
 ];
 
 export const THEMES: Record<string, SectionColors> = {
@@ -63,13 +60,13 @@ export const SECTION_THEME_MAP: {
  [key: number]: SectionColors | { [subKey: number]: SectionColors };
 } = {
  [Sections.Home]: THEMES.main,
- [Sections.Works]: {
-  0: THEMES.mjolnir,
-  1: THEMES.ainur,
-  2: THEMES.jeton,
- },
- [Sections.Experience]: THEMES.experiences,
- [Sections.Contact]: THEMES.main,
+//  [Sections.Works]: {
+//   0: THEMES.mjolnir,
+//   1: THEMES.ainur,
+//   2: THEMES.jeton,
+//  },
+//  [Sections.Experience]: THEMES.experiences,
+//  [Sections.Contact]: THEMES.main,
 };
 
 export const WORKS_ITEMS = [

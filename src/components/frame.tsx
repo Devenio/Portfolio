@@ -1,7 +1,6 @@
 'use client';
 
 import { useSection } from '@/lib/hooks';
-import Navigation from './navigation';
 import Curves from './curves';
 import { motion } from 'framer-motion';
 import Socials from './socials';
@@ -23,7 +22,7 @@ export default function Frame() {
     transition={{ duration: ANIMATION_DURATION.MEDIUM, ease: 'easeInOut' }}
     className={`fixed top-5 sm:top-10 left-5 sm:left-10 z-20  `}
    >
-    <BubbleText className="text-2xl sm:text-4xl" text="Mahziyar Erfani" />
+    <BubbleText className="text-2xl sm:text-4xl" text="Prop Trading Community" />
    </motion.h1>
 
    <motion.p
@@ -33,9 +32,9 @@ export default function Frame() {
      opacity: 1,
     }}
     transition={{ duration: ANIMATION_DURATION.MEDIUM, ease: 'easeInOut' }}
-    className="2xl:mt-5 fixed bottom-5 sm:bottom-10 left-5 sm:left-10 text-theme-secondary text-lg font-semibold  "
+    className="2xl:mt-5 fixed bottom-5 sm:bottom-10 left-5 sm:left-10 text-theme-primary text-lg"
    >
-    Frontend Developer
+    Developed by: <a className='font-bold' href="https://t.me/Devenio" target='_blank'>Nima Shahbazi</a>
    </motion.p>
 
    <motion.div
@@ -49,8 +48,11 @@ export default function Frame() {
    />
 
    <Socials className="hidden lg:flex right-5 sm:bottom-10 sm:right-10 fixed bottom-5 " />
+   {/* <motion.p className='bottom-10 fixed'>
+    Developed by: Nima Shahbazi
+   </motion.p> */}
    <Curves />
-   <Navigation />
+   {/* <Navigation /> */}
    <SectionTitle />
   </div>
  );
